@@ -15,10 +15,10 @@ function App() {
   const [walletInstance, setWalletInstance] = useState(null);
   const [output, setOutput] = useState("Welcome to Banana Demo");
 
-  const SampleContractAddress = "0xCB8a3Ca479aa171aE895A5D2215A9115D261A566";
+  const SampleContractAddress = "0xCC497f137C3A5036C043EBd62c36F1b8C8A636C0";
 
   const getBananaInstance = () => {
-    const bananaInstance = new Banana(Chains.chiadoTestnet);
+    const bananaInstance = new Banana(Chains.shibuyaTestnet);
     setBananSdkInstance(bananaInstance);
   };
 
@@ -51,7 +51,7 @@ function App() {
   const makeTransaction = async () => {
     setIsLoading(true);
     const signer = walletInstance.getSigner();
-    const amount = "0.00001";
+    const amount = "0.05";
     const tx = {
       gasLimit: "0x55555",
       to: SampleContractAddress,
@@ -63,7 +63,7 @@ function App() {
     };
 
     try {
-      const txn = signer.sendTransaction(tx);
+      const txn = await signer.sendTransaction(tx);
       setOutput(JSON.stringify(txn));
     } catch (err) {
       console.log(err);
